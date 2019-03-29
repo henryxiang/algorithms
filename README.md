@@ -1,6 +1,6 @@
 # Algorithms
 
-Here we provide JavaScript implementation of the algorithms described in
+Here we provide Java and JavaScript implementation of the algorithms described in
 the classic computer science textbook [Algorithms][1] by Robert Sedgewick
 and Kevin Wayne.
 
@@ -24,10 +24,5 @@ and Kevin Wayne.
   - Trie
   - Substring Matching
   - Regular Expression
-
-## NPM Scripts
-
-- `npm start -- src/{algorithm_dir}`: run a program in `src/{algorithm}` directory
-- `npm run dev -- src/{algorithm_dir}`: run a program in `src/{algorithm}` directory in watch mode
 
 [1]: https://algs4.cs.princeton.edu/home/
