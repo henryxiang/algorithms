@@ -45,4 +45,19 @@ public class LinkedListTest {
         }
     }
 
+    @Test
+    public void testIteration() {
+        list = new LinkedList<>();
+
+        int n = 5;
+        for (int i = 0; i < n; i++) {
+            list.add(i);
+        }
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Integer e : list) {
+            stringBuilder.append(e);
+        }
+        assertEquals("01234", stringBuilder.toString());
+    }
 }
