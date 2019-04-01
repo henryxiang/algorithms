@@ -155,4 +155,22 @@ public class BSTTest {
         if (node == null) return -1;
         return 1 + Math.max(bstHeight(node.left), bstHeight(node.right));
     }
+
+    @Test
+    public void testTreeBalance() {
+        String[] data = {
+                "A", "B", "C", "D", "E", "F", "G"
+        };
+        Utils.shuffle(data);
+
+        BST<String, String> bst = new BST<>();
+        for(String e : data) {
+            bst.put(e, e);
+        }
+
+        System.out.println(bst.toJsonString());
+        System.out.println("Is tree balanced? " + bst.isBalanced());
+
+        assertEquals(data.length, bst.size());
+    }
 }

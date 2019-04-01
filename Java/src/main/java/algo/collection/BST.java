@@ -1,6 +1,8 @@
 package algo.collection;
 
 import algo.collection.list.LinkedList;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.Iterator;
 
@@ -191,5 +193,22 @@ public class BST<K extends Comparable, V> implements Iterable<BST.Node> {
         if (root.left != null && root.left.key != null && root.key.compareTo(root.left.key) < 0) return false;
         if (root.right != null && root.right.key != null && root.key.compareTo(root.right.key) > 0) return false;
         return true;
+    }
+
+    public boolean isBalanced() {
+        return isBalanced(root);
+    }
+
+    private boolean isBalanced(Node<K, V> node) {
+        if (node == null) return true;
+        return Math.abs(height(node.left) - height(node.right)) <= 1 &&
+                isBalanced(node.left) &&
+                isBalanced(node.right);
+    }
+
+    public String toJsonString() {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String json = gson.toJson(root);
+        return json;
     }
 }
