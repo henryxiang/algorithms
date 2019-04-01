@@ -30,3 +30,12 @@ dependencies {
 
 // Define the main class for the application
 mainClassName = 'algo.App'
+
+// Display outputs of tests
+test {
+    testLogging {
+//        events "passed", "started", "failed", "skipped"
+        events "passed", "failed"
+    }
+}
+
