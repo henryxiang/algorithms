@@ -25,13 +25,13 @@ public class Utils {
         return true;
     }
 
-    public static void swap(Comparable[] input, int i, int j) {
-        Comparable temp = input[i];
+    public static <T> void swap(T[] input, int i, int j) {
+        T temp = input[i];
         input[i] = input[j];
         input[j] = temp;
     }
 
-    public static void reverse(Comparable[] input) {
+    public static <T> void reverse(T[] input) {
         int i = 0, j = input.length - 1;
         while(i < j) {
             swap(input, i++, j--);
