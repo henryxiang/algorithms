@@ -30,4 +30,11 @@ public class Utils {
         input[i] = input[j];
         input[j] = temp;
     }
+
+    public static void reverse(Comparable[] input) {
+        int i = 0, j = input.length - 1;
+        while(i < j) {
+            swap(input, i++, j--);
+        }
+    }
 }

@@ -4,7 +4,7 @@ import algo.sorting.QuickSort;
 import algo.sorting.Utils;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class BSTTest {
 
@@ -46,5 +46,113 @@ public class BSTTest {
         }
         QuickSort.sort(data);
         assertEquals(String.join("", data), stringBuilder.toString());
+    }
+
+    @Test
+    public void testBSTValidation() {
+        String[] data = {
+                "A", "B", "C", "D", "E", "F", "G"
+        };
+        Utils.shuffle(data);
+
+        BST<String, String> bst = new BST<>();
+        assertTrue(bst.isBST());
+
+        for(String e : data) {
+            bst.put(e, e);
+            assertTrue(bst.isBST());
+        }
+    }
+
+    @Test
+    public void testFindMinAndDeleteMin() {
+        String[] data = {
+                "A", "B", "C", "D", "E", "F", "G"
+        };
+        Utils.shuffle(data);
+
+        BST<String, String> bst = new BST<>();
+        for(String e : data) {
+            bst.put(e, e);
+        }
+
+        int size = data.length;
+        assertEquals(size, bst.size());
+
+        QuickSort.sort(data);
+        for (String e : data) {
+            assertEquals(e, bst.min().key);
+            bst.deleteMin();
+            assertNull(bst.get(e));
+            assertEquals(--size, bst.size());
+        }
+    }
+
+    @Test
+    public void testFindMaxAndDeleteMax() {
+        String[] data = {
+                "A", "B", "C", "D", "E", "F", "G"
+        };
+        Utils.shuffle(data);
+
+        BST<String, String> bst = new BST<>();
+        for(String e : data) {
+            bst.put(e, e);
+        }
+
+        int size = data.length;
+        assertEquals(size, bst.size());
+
+        QuickSort.sort(data);
+        Utils.reverse(data);
+        for (String e : data) {
+            assertEquals(e, bst.max().key);
+            bst.deleteMax();
+            assertNull(bst.get(e));
+            assertEquals(--size, bst.size());
+        }
+    }
+
+    @Test
+    public void testDeletion() {
+        String[] data = {
+                "A", "B", "C", "D", "E", "F", "G"
+        };
+        Utils.shuffle(data);
+
+        BST<String, String> bst = new BST<>();
+        for(String e : data) {
+            bst.put(e, e);
+        }
+
+        int size = data.length;
+        assertEquals(size, bst.size());
+
+        Utils.shuffle((data));
+        for(String e : data) {
+            bst.delete(e);
+            assertNull(bst.get(e));
+            assertEquals(--size, bst.size());
+        }
+    }
+
+    @Test
+    public void testGettingTreeHeight() {
+        String[] data = {
+                "A", "B", "C", "D", "E", "F", "G"
+        };
+        Utils.shuffle(data);
+
+        BST<String, String> bst = new BST<>();
+        for(String e : data) {
+            bst.put(e, e);
+        }
+
+        assertEquals(bstHeight(bst.root), bst.height());
+    }
+
+    private int bstHeight(BST.Node node) {
+        if (node == null) return -1;
+        return 1 + Math.max(bstHeight(node.left), bstHeight(node.right));
     }
 }
