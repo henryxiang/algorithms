@@ -1,4 +1,4 @@
-package algo.collection;
+package algo.collection.tree;
 
 import algo.sorting.QuickSort;
 import algo.sorting.Utils;
@@ -37,7 +37,7 @@ public class BSTTest {
         Utils.shuffle(data);
 
         BST<String, String> bst = new BST<>();
-        for(String e : data) {
+        for (String e : data) {
             bst.put(e, e);
         }
         StringBuilder stringBuilder = new StringBuilder();
@@ -58,7 +58,7 @@ public class BSTTest {
         BST<String, String> bst = new BST<>();
         assertTrue(bst.isBST());
 
-        for(String e : data) {
+        for (String e : data) {
             bst.put(e, e);
             assertTrue(bst.isBST());
         }
@@ -72,7 +72,7 @@ public class BSTTest {
         Utils.shuffle(data);
 
         BST<String, String> bst = new BST<>();
-        for(String e : data) {
+        for (String e : data) {
             bst.put(e, e);
         }
 
@@ -96,7 +96,7 @@ public class BSTTest {
         Utils.shuffle(data);
 
         BST<String, String> bst = new BST<>();
-        for(String e : data) {
+        for (String e : data) {
             bst.put(e, e);
         }
 
@@ -121,7 +121,7 @@ public class BSTTest {
         Utils.shuffle(data);
 
         BST<String, String> bst = new BST<>();
-        for(String e : data) {
+        for (String e : data) {
             bst.put(e, e);
         }
 
@@ -129,7 +129,7 @@ public class BSTTest {
         assertEquals(size, bst.size());
 
         Utils.shuffle((data));
-        for(String e : data) {
+        for (String e : data) {
             bst.delete(e);
             assertNull(bst.get(e));
             assertEquals(--size, bst.size());
@@ -144,7 +144,7 @@ public class BSTTest {
         Utils.shuffle(data);
 
         BST<String, String> bst = new BST<>();
-        for(String e : data) {
+        for (String e : data) {
             bst.put(e, e);
         }
 
@@ -164,7 +164,7 @@ public class BSTTest {
         Utils.shuffle(data);
 
         BST<String, String> bst = new BST<>();
-        for(String e : data) {
+        for (String e : data) {
             bst.put(e, e);
         }
 

@@ -20,8 +20,8 @@ public class LinkedListTest {
         assertEquals(5, list.size());
 
         for (int i = 0; i < n; i++) {
-            Node<Integer> node = list.get(i);
-            assertEquals(Integer.valueOf(i), node.value);
+            Integer value = list.get(i);
+            assertEquals(Integer.valueOf(i), value);
         }
     }
 
@@ -36,12 +36,13 @@ public class LinkedListTest {
         }
 
         for (int i = 0; i < initialValues.length; i++) {
-            assertEquals(initialValues[i], list.get(i).value);
+            assertEquals(initialValues[i], list.get(i));
         }
 
         list.remove(2);
+        assertEquals(finalValues.length, list.size());
         for (int i = 0; i < finalValues.length; i++) {
-            assertEquals(finalValues[i], list.get(i).value);
+            assertEquals(finalValues[i], list.get(i));
         }
     }
 

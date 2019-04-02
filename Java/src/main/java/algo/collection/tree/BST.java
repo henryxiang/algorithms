@@ -1,4 +1,4 @@
-package algo.collection;
+package algo.collection.tree;
 
 import algo.collection.list.LinkedList;
 import com.google.gson.Gson;
