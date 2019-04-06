@@ -1,14 +1,14 @@
 package algo.collection.list;
 
-import org.checkerframework.checker.units.qual.A;
+import java.util.Iterator;
 
-public class ArrayList<T> implements List<T> {
+public class ArrayList<T> implements List<T>, Iterable<T> {
     private static final int DEFAULT_SIZE = 100;
     private T[] data;
     private int lastIndex = -1;
 
     public ArrayList() {
-        data = (T[]) new Object[DEFAULT_SIZE];
+        this(DEFAULT_SIZE);
     }
 
     public ArrayList(int size) {
@@ -17,12 +17,13 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public void add(T item) {
-        data[lastIndex++] = item;
+        set(lastIndex+1, item);
     }
 
     @Override
-    public void add(int index, T item) {
-        shiftRight(index);
+    public void set(int index, T item) {
+        if (lastIndex >= data.length - 1) expand();
+        if (lastIndex >= 0) shiftRight(index);
         data[index] = item;
         lastIndex++;
     }
@@ -37,6 +38,7 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public T remove(int index) {
+        if (lastIndex < data.length / 4 && data.length >= 4) shrink();
         T value = get(index);
         shiftLeft(index+1);
         data[lastIndex--] = null;
@@ -75,6 +77,25 @@ public class ArrayList<T> implements List<T> {
     private void copyArray(T[] src, T[] dst, int from, int to) {
         for (int i = from; i <= to; i++) {
             dst[i] = src[i];
+        }
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new ListIterator<>();
+    }
+
+    private class ListIterator<T> implements Iterator<T> {
+        int index = 0;
+
+        @Override
+        public boolean hasNext() {
+            return index <= lastIndex;
+        }
+
+        @Override
+        public T next() {
+            return (T) data[index++];
         }
     }
 }

@@ -7,20 +7,6 @@ import com.google.gson.GsonBuilder;
 import java.util.Iterator;
 
 public class BST<K extends Comparable, V> implements Iterable<BST.Node> {
-    @Override
-    public Iterator<BST.Node> iterator() {
-        LinkedList<BST.Node> list = new LinkedList<>();
-        inOrderTraverse(root, list);
-        return list.iterator();
-    }
-
-    private void inOrderTraverse(Node root, LinkedList<BST.Node> list) {
-        if(root == null) return;
-        inOrderTraverse(root.left, list);
-        list.add(root);
-        inOrderTraverse(root.right, list);
-    }
-
     protected class Node<K, V> {
         K key;
         V value;
@@ -179,6 +165,20 @@ public class BST<K extends Comparable, V> implements Iterable<BST.Node> {
         node.size = 1 + size(node.left) + size(node.right);
         node.height = 1 + Math.max(height(node.left), height(node.right));
         return node;
+    }
+
+    @Override
+    public Iterator<BST.Node> iterator() {
+        LinkedList<BST.Node> list = new LinkedList<>();
+        inOrderTraverse(root, list);
+        return list.iterator();
+    }
+
+    private void inOrderTraverse(Node root, LinkedList<BST.Node> list) {
+        if(root == null) return;
+        inOrderTraverse(root.left, list);
+        list.add(root);
+        inOrderTraverse(root.right, list);
     }
 
     public boolean isBST() {

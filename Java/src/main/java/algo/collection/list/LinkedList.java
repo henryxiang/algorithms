@@ -6,10 +6,11 @@ import java.util.Iterator;
  * LinkedList
  */
 public class LinkedList<T> implements List<T>, Iterable<T> {
-    private Node head;
-    private int size;
+    protected Node head;
+    protected Node tail;
+    protected int size;
 
-    private class Node {
+    protected class Node {
         protected T value;
         protected Node next;
 
@@ -33,29 +34,50 @@ public class LinkedList<T> implements List<T>, Iterable<T> {
 
     @Override
     public T get(int index) {
+        if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Invalid index: " + index);
         Node node = getNodeAt(index);
         return node == null ? null : node.value;
     }
 
     @Override
-    public void add(int index, T value) {
-        Node node = new Node(value);
+    public void set(int index, T value) {
+        if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Invalid index: " + index);
         if (index == 0) {
-            Node temp = head;
-            head = node;
-            node.next = temp;
+            addFirst(value);
+        } else if (index == size-1) {
+            add(value);
         } else {
+            Node node = new Node(value);
             Node prev = getNodeAt(index-1);
-            Node temp = prev.next;
+            node.next = prev.next;
             prev.next = node;
-            node.next = temp;
+        }
+        size++;
+    }
+
+    public void addFirst(T value) {
+        Node node = new Node(value);
+        if (head == null) {
+            head = node;
+            tail = node;
+        } else {
+            node.next = head;
+            head = node;
         }
         size++;
     }
 
     @Override
     public void add(T value) {
-        add(size, value);
+        Node node = new Node(value);
+        if (head == null) {
+            head = node;
+            tail = node;
+        } else {
+            tail.next = node;
+            tail = node;
+        }
+        size++;
     }
 
     @Override
@@ -63,18 +85,19 @@ public class LinkedList<T> implements List<T>, Iterable<T> {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
-        Node node;
+        Node removedNode;
         if (index == 0) {
-            node = head;
-            head = node.next;
+            removedNode = head;
+            head = removedNode.next;
+            if (head == null) tail = null;
         } else {
             Node prev = getNodeAt(index-1);
-            node = prev.next;
-            prev.next = node.next;
+            removedNode = prev.next;
+            prev.next = removedNode.next;
+            if (removedNode == tail) tail = prev;
         }
-        node.next = null;
         size--;
-        return node.value;
+        return removedNode.value;
     }
 
     @Override
